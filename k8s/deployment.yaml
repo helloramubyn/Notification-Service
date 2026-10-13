@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: i27-notification
+  labels:
+    app: i27-notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: i27-notification
+  template:
+    metadata:
+      labels:
+        app: i27-notification
+    spec:
+      containers:
+        - name: i27-notification
+          image: bynramu/i27helpdesk-notification:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8084
+          envFrom:
+            - secretRef:
+                name: i27-notification-dev
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8084
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8084
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          # resources:
+          #   requests:
+          #     cpu: 100m
+          #     memory: 256Mi
+          #   limits:
+          #     cpu: 500m
+          #     memory: 512Mi
