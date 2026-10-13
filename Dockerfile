@@ -8,7 +8,7 @@ COPY requirements.txt .
 
 # Install dependencies
 RUN pip install -r requirements.txt
-
+ 
 # Copy the rest of the code
 COPY . .
 
