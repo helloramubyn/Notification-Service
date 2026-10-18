@@ -1,4 +1,4 @@
-name: Notifcation-Service CI/CD
+name: Notification-Service CI/CD
 run-name: Deploy to ${{ inputs.environment || 'dev' }} | by ${{ github.actor }} | branch ${{github.ref_name}}
 on: 
  workflow_dispatch:
