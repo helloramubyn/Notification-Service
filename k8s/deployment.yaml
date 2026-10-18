@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
         - name: i27-notification
-          image: bynramu/i27helpdesk-notification:v1
+          image: ${IMAGE}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8084
           envFrom:
             - secretRef:
-                name: i27-notification-dev
+                name: ${SECRET_NAME}
           readinessProbe:
             httpGet:
               path: /readyz
